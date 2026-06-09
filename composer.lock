@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e6f51a89aade47b1a54be485a0f9cc1",
+    "content-hash": "b5760706f35b731fce7c6f44e1401f1a",
     "packages": [
         {
             "name": "brick/math",
@@ -1340,6 +1340,69 @@
                 "source": "https://github.com/laravel/prompts/tree/v0.3.18"
             },
             "time": "2026-05-19T00:47:18+00:00"
+        },
+        {
+            "name": "laravel/sanctum",
+            "version": "v4.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sanctum.git",
+                "reference": "2a9bccc18e9907808e0018dd15fa643937886b1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/2a9bccc18e9907808e0018dd15fa643937886b1e",
+                "reference": "2a9bccc18e9907808e0018dd15fa643937886b1e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^11.0|^12.0|^13.0",
+                "illuminate/contracts": "^11.0|^12.0|^13.0",
+                "illuminate/database": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": "^8.2",
+                "symfony/console": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^9.15|^10.8|^11.0",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Sanctum\\SanctumServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Sanctum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs.",
+            "keywords": [
+                "auth",
+                "laravel",
+                "sanctum"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/sanctum/issues",
+                "source": "https://github.com/laravel/sanctum"
+            },
+            "time": "2026-04-30T11:46:25+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -5893,6 +5956,59 @@
                 }
             ],
             "time": "2026-03-30T13:44:50+00:00"
+        },
+        {
+            "name": "tarfin-labs/zbar-php",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tarfin-labs/zbar-php.git",
+                "reference": "4eef8b629cbcf41d0ca1ed80f25cb98586f5368a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tarfin-labs/zbar-php/zipball/4eef8b629cbcf41d0ca1ed80f25cb98586f5368a",
+                "reference": "4eef8b629cbcf41d0ca1ed80f25cb98586f5368a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-imagick": "*",
+                "php": "^8.2|^8.3|^8.4|^8.5",
+                "symfony/process": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0|^12.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TarfinLabs\\ZbarPhp\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Faruk Can",
+                    "email": "faruk.can@tarfin.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "zbar-php is a php package that provides an interface to the zbar bar-code reading library.",
+            "homepage": "https://github.com/tarfin-labs/zbar-php",
+            "keywords": [
+                "bar-code",
+                "qr-code",
+                "tarfin-labs",
+                "zbar-php"
+            ],
+            "support": {
+                "issues": "https://github.com/tarfin-labs/zbar-php/issues",
+                "source": "https://github.com/tarfin-labs/zbar-php/tree/2.1.0"
+            },
+            "time": "2026-04-08T14:04:54+00:00"
         },
         {
             "name": "thiagoalessio/tesseract_ocr",
