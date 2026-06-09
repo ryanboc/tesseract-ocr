@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Services\OcrService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Exception;
+use Illuminate\Support\Facades\DB;
 
 class OcrController extends Controller
 {
     protected $ocrService;
 
-    // Laravel 13 automatically resolves and injects your custom service here
     public function __construct(OcrService $ocrService)
     {
         $this->ocrService = $ocrService;
@@ -20,38 +19,46 @@ class OcrController extends Controller
     public function process(Request $request): JsonResponse
     {
         $request->validate([
-            'image' => 'required|image|mimes:png,jpg,jpeg,webp|max:12288',
+            'image' => 'required|image|max:12288',
         ]);
 
         $file = $request->file('image');
-
-        // Store file temporarily
         $tempPath = $file->store('ocr_temp', 'local');
-        $absolutePath = storage_path('app/private/' . $tempPath); 
+        $absolutePath = storage_path('app/private/' . $tempPath);
 
         try {
-            // Scan only the barcode
-            $barcodes = $this->ocrService->readBarcode($absolutePath);
+            // Process image and extract structured data arrays
+            $parsedData = $this->ocrService->readAndParseBarcode($absolutePath);
 
-            // Clean up the temp image
             if (file_exists($absolutePath)) {
                 unlink($absolutePath);
             }
 
-            // Return strictly the barcode array
+            if (!$parsedData) {
+                return response()->json(['success' => false, 'message' => 'No barcode detected.'], 422);
+            }
+
+            // Write straight to the production conveyor logistics DB
+            DB::table('poultry_packs')->insertOrIgnore([
+                'full_barcode'     => $parsedData['full_barcode'],
+                'gtin'             => $parsedData['gtin'],
+                'best_before_date' => $parsedData['best_before_date'],
+                'weight_kg'        => $parsedData['weight_kg'],
+                'serial_number'    => $parsedData['serial_number'],
+                'created_at'       => now(),
+                'updated_at'       => now(),
+            ]);
+
             return response()->json([
-                'barcodes' => $barcodes,
+                'success' => true,
+                'data'    => $parsedData
             ]);
 
         } catch (Exception $e) {
             if (file_exists($absolutePath)) {
                 unlink($absolutePath);
             }
-
-            return response()->json([
-                'message' => 'Processing failed.',
-                'error' => $e->getMessage(),
-            ], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 }
